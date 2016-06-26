@@ -15,7 +15,21 @@ else:
     from urllib import quote_plus as qp
 
 
+def open_url(url, hdr={}):
+	"""For use in a proxy network"""
 
+    http_proxy  = os.environ.get("HTTP_PROXY")
+    https_proxy = os.environ.get("HTTPS_PROXY")
+    ftp_proxy   = os.environ.get("FTP_PROXY")
+
+    proxyDict = { 
+        "http"  : http_proxy,
+        "https" : https_proxy,
+        "ftp"   : ftp_proxy
+        }
+
+    html = requests.get(url, headers=hdr, proxies=proxyDict)
+    return html
 
 
 def list_torrents(torrents):
