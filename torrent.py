@@ -16,7 +16,7 @@ else:
 
 
 def open_url(url, hdr={}):
-	"""For use in a proxy network"""
+    """For use in a proxy network"""
 
     http_proxy  = os.environ.get("HTTP_PROXY")
     https_proxy = os.environ.get("HTTPS_PROXY")
@@ -33,7 +33,7 @@ def open_url(url, hdr={}):
 
 
 def list_torrents(torrents):
-	""" List all the find torrents in a more teadable format"""
+    """ List all the find torrents in a more teadable format"""
 
     for title, (torrent_link, _) in enumerate(torrents):
         yield '[{}] {}'.format(title, torrent_link)
@@ -86,7 +86,6 @@ def main():
     try:
         print ('Searching....')
         torrent_list = get_torrent_list(url)
-        print (torrent_list)
 
     except Exception as e:
         print (e)
@@ -117,7 +116,7 @@ def main():
     torrent_page = open_url(final_url)
     soup = BeautifulSoup(torrent_page.text, 'html.parser')
     final = 'https:' + soup.find_all('a', class_='siteButton')[0].get('href')
-    
+
     os.system('peerflix ' + final + ' -a --vlc')
 
 
